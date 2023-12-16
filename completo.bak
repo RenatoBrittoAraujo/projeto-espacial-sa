@@ -1,12 +1,9 @@
 %General Mission Analysis Tool(GMAT) Script
 %Created: 2023-11-29 12:48:16
 
-
-%SolarSystem.EphemerisSource = 'SPICE'
-%SolarSystem.SPKFilename = '../data/planetary_ephem/spk/de421.bsp'
-
-%Earth.EquatorialRadius = 6378.1366
-%Earth.Flattening = 0.00335281310845547
+SolarSystem.PCKFilename = '../data/planetary_coeff/pck00010.tpc'
+Earth.EquatorialRadius = 6378.1366
+Earth.Flattening = 0.00335281310845547
 
 %----------------------------------------
 %---------- Spacecraft
@@ -17,12 +14,12 @@ GMAT DefaultSC.DateFormat = UTCGregorian;
 GMAT DefaultSC.Epoch = '18 Dec 2023 00:00:00.000';
 GMAT DefaultSC.CoordinateSystem = EarthMJ2000Eq;
 GMAT DefaultSC.DisplayStateType = ModifiedKeplerian;
-GMAT DefaultSC.RadPer = 6871.000000000005;
-GMAT DefaultSC.RadApo = 26371.00000000068;
-GMAT DefaultSC.INC = 19.99999999999999;
-GMAT DefaultSC.RAAN = 0;
-GMAT DefaultSC.AOP = 0;
-GMAT DefaultSC.TA = 0;
+GMAT DefaultSC.RadPer = 6778;
+GMAT DefaultSC.RadApo = 6778;
+GMAT DefaultSC.INC = 20;
+GMAT DefaultSC.RAAN = 360;
+GMAT DefaultSC.AOP = 356.352;
+GMAT DefaultSC.TA = 90;
 GMAT DefaultSC.DryMass = 850;
 GMAT DefaultSC.Cd = 2.2;
 GMAT DefaultSC.Cr = 1.8;
@@ -89,8 +86,8 @@ GMAT AntenaLDTEA.CentralBody = Earth;
 GMAT AntenaLDTEA.StateType = Spherical;
 GMAT AntenaLDTEA.HorizonReference = Ellipsoid;
 GMAT AntenaLDTEA.Location1 = -15.990271;
-GMAT AntenaLDTEA.Location2 = 311.956331;
-GMAT AntenaLDTEA.Location3 = 1;
+GMAT AntenaLDTEA.Location2 = -48.043669;
+GMAT AntenaLDTEA.Location3 = 0;
 GMAT AntenaLDTEA.Id = 'StationId';
 GMAT AntenaLDTEA.IonosphereModel = 'None';
 GMAT AntenaLDTEA.TroposphereModel = 'None';
@@ -229,7 +226,7 @@ GMAT DefaultGroundTrackPlot.TextureMap = 'ModifiedBlueMarble.jpg';
 %----------------------------------------
 
 BeginMissionSequence;
-Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedDays = 1};
+Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedDays = 31};
 
 %---------------------------------
 %----------- CUSTOM
