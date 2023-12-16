@@ -27,7 +27,7 @@ em graus 360: -15.990271 311.956331
 
 #### coloque uma órbita de satélite
 
-Earth radius: 6371 km
+Earth radius: 6378.1366 km
 
 EarthMJ2000Eq coordinate system and Modified Keplerian state type 
 
