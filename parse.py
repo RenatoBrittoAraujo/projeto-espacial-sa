@@ -1,4 +1,11 @@
-filename = "ContactLocator1.txt"
+import sys
+
+if len(sys.argv) < 2:
+    print("Usage: python3 parse.py <dataset_filename>")
+    exit(1)
+
+filename = f"ContactLocator{sys.argv[1]}.txt"
+output = f"dataset{sys.argv[1]}.csv"
 
 content = ""
 with open(filename) as f:
@@ -58,7 +65,7 @@ for line in lines:
 import csv
 
 # save dataset to csv
-with open("dataset.csv", "w") as f:
+with open(output, "w") as f:
     writer = csv.DictWriter(f, fieldnames=headers)
     writer.writeheader()
     writer.writerows(dataset)
