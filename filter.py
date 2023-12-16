@@ -21,12 +21,6 @@ range = 600
 range_earth = range + R
 
 
-# filter dataset
-filtered = []
-for data in dataset:
-    if float(data["Range (km)"]) < range:
-        filtered.append(data)
-
 # get all ranges
 ranges = [float(data["Range (km)"]) for data in dataset]
 
@@ -35,12 +29,22 @@ mean = sum(ranges) / len(ranges)
 variance = sum([(r - mean) ** 2 for r in ranges]) / len(ranges)
 std_dev = variance**0.5
 
+# save all ranges to file
+with open("ranges.txt", "w") as f:
+    f.write("\n".join([str(r) for r in ranges]))
+
+
 # print results
 print("Mean:", mean)
 print("Standard Deviation:", std_dev)
 print("Max Range:", max(ranges))
 print("Min Range:", min(ranges))
 
+# filter dataset
+filtered = []
+for data in dataset:
+    if float(data["Range (km)"]) < range:
+        filtered.append(data)
 
 print("FILTERED:", filtered)
 
