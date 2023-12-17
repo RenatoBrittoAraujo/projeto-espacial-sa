@@ -1,3 +1,0 @@
-Target: DefaultSC
-
-No contacts detected

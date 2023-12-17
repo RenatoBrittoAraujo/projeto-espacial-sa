@@ -1,5 +1,0 @@
-Mean: 14775.358439396461
-Standard Deviation: 5154.88418034084
-Max Range: 19992.773962329273
-Min Range: 494.18283236402203
-Events in target of <600: 12540

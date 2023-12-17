@@ -89,4 +89,17 @@ ALTITUDE: 1.5
 - tentativa 26: alterei angulo mínimo de contato de -90 para 90 (mudou para 26935)
 - tentativa 27: retornei angulo minimo 0 removi todos as configurações customizada, deveria ser boa prática (resultado nada mudou)
 
+27 - INC=20 - 
+28 - INC=0 - 
+29 - INC=5 - 4980
+30 - INC=6 - 4790
+31 - INC=7 - 4490
+32 - INC=7.5 - 4335
+33 - INC=8 - 
+34 - INC=8.5 - 
+35 - INC=9 - 
+36 - INC=10 - 
+37 - INC=15 - 
+38 - INC=25 - 
+
 
