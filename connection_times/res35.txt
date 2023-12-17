@@ -1,0 +1,10 @@
+Mean: 14619.537463139632
+Standard Deviation: 5303.009353575169
+Max Range: 19984.51106253053
+Min Range: 491.04957266634847
+Events in target of <600: 3620
+Mean (linear): 16819.440282078816
+Standard Deviation (linear): 5303.009353575169
+Max Range (linear): 25375.591
+Min Range (linear): 1879.314
+Events in target of <600 (linear): 0

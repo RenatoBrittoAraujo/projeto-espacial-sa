@@ -21,29 +21,23 @@ range = 600
 # range with earth radius
 range_earth = range + R
 
-dist_antena = R + 1.5
 
 INTERVAL_STEP_SIZE = 5
 
 # get all ranges
 ranges2 = [float(data["Range (km)"]) for data in dataset]
 
+dist_antena = R + 1.5
 ranges = []
 for data in dataset:
     d = float(data["Range (km)"])
     o = float(data["Elevation (deg)"])
     o = math.radians(o)
-
     y = dist_antena
-
     vx = y + math.sin(o) * d
     vy = math.cos(o) * d
-
     alt = math.sqrt(vx**2 + vy**2) - dist_antena
-
     res = alt
-
-    # res = r * math.cos(e)
     ranges.append(res)
 
     # print("D:", d, "O (deg):", math.degrees(o), "alt:\t", res)
