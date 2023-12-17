@@ -75,4 +75,14 @@ RAAN = 360
 AOP = 356.352
 TA = 90
 
-Ao mudar o valor da altitude da FGA de 0 metros de altitude para 1.5km de altitude (a altitude de brasília)
+Coordenadas:
+LAT: -15.99027099999999
+LONG: 311.956331
+ALTITUDE: 1.5
+
+- tentativa 21: mudei pro propagador PrinceDormand78 com tamanho da passo = 0 ([motivo](https://documentation.help/GMAT/Propagator.html)) (exatamente o mesmo resultado) 
+- tentativa 22: botei a antena a 5km de altura para ver o que acontece (aumentou em 10 segundos)
+- tentative 23: reduzi a antena para 1.5km e alterei o formato da terra de elipsoide para esférico (mudou de 2580 para 2545)
+- tentativa 24: retornei pro formato eliptico da terra removi todos as configurações customizada, deveria ser boa prática
+
+
