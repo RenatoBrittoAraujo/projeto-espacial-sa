@@ -24,7 +24,7 @@ range_earth = range + R
 INTERVAL_STEP_SIZE = 5
 
 # get all ranges
-# ranges = [float(data["Range (km)"]) for data in dataset]
+ranges2 = [float(data["Range (km)"]) for data in dataset]
 
 ranges = []
 for data in dataset:
@@ -52,6 +52,10 @@ mean = sum(ranges) / len(ranges)
 variance = sum([(r - mean) ** 2 for r in ranges]) / len(ranges)
 std_dev = variance**0.5
 
+mean2 = sum(ranges2) / len(ranges2)
+variance2 = sum([(r - mean) ** 2 for r in ranges2]) / len(ranges2)
+std_dev2 = variance**0.5
+
 # save all ranges to file
 # with open("ranges.txt", "w") as f:
 #     f.write("\n".join([str(r) for r in ranges]))
@@ -63,16 +67,28 @@ print("Standard Deviation:", std_dev)
 print("Max Range:", max(ranges))
 print("Min Range:", min(ranges))
 
+
 # filter dataset
 filtered = []
 for val in ranges:
     if val < range:
         filtered.append(val)
+# filter dataset
+filtered2 = []
+for val in ranges2:
+    if val < range:
+        filtered2.append(val)
 
 
 # print("FILTERED:", filtered)
 
 print(f"Events in target of <{range}:", len(filtered) * INTERVAL_STEP_SIZE)
+print("-------------")
+print("Mean (linear):", mean2)
+print("Standard Deviation (linear):", std_dev2)
+print("Max Range (linear):", max(ranges2))
+print("Min Range (linear):", min(ranges2))
+print(f"Events in target of <{range} (linear):", len(filtered2) * INTERVAL_STEP_SIZE)
 
 # save printed info to res%d.txt
 with open(f"res{sys.argv[1]}.txt", "w") as f:
@@ -81,4 +97,11 @@ with open(f"res{sys.argv[1]}.txt", "w") as f:
     f.write(f"Max Range: {max(ranges)}\n")
     f.write(f"Min Range: {min(ranges)}\n")
     f.write(f"Events in target of <{range}: {len(filtered) * INTERVAL_STEP_SIZE}\n")
+    f.write(f"Mean (linear): {mean2}\n")
+    f.write(f"Standard Deviation (linear): {std_dev2}\n")
+    f.write(f"Max Range (linear): {max(ranges2)}\n")
+    f.write(f"Min Range (linear): {min(ranges2)}\n")
+    f.write(
+        f"Events in target of <{range} (linear): {len(filtered2) * INTERVAL_STEP_SIZE}\n"
+    )
     # f.write(f"FILTERED: {filtered}\n")

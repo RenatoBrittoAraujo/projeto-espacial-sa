@@ -81,8 +81,12 @@ LONG: 311.956331
 ALTITUDE: 1.5
 
 - tentativa 21: mudei pro propagador PrinceDormand78 com tamanho da passo = 0 ([motivo](https://documentation.help/GMAT/Propagator.html)) (exatamente o mesmo resultado) 
-- tentativa 22: botei a antena a 5km de altura para ver o que acontece (aumentou em 10 segundos)
+- tentativa 22: botei a antena a 5km de altura para ver o que acontece (de 2570 aumentou em 10 segundos)
 - tentative 23: reduzi a antena para 1.5km e alterei o formato da terra de elipsoide para esférico (mudou de 2580 para 2545)
-- tentativa 24: retornei pro formato eliptico da terra removi todos as configurações customizada, deveria ser boa prática
+- tentativa 24: retornei pro formato eliptico da terra alterei angulo mínimo de contato de 0 para -90 (aumentou para 51985!!?)
+- tentativa 23: alterei angulo mínimo de contato de -90 para 90 (diminui para 0)
+- tentativa 25: alterei angulo mínimo de contato de -90 para 90 (mudou para 26935)
+- tentativa 26: alterei angulo mínimo de contato de -90 para 90 (mudou para 26935)
+- tentativa 27: retornei angulo minimo 0 removi todos as configurações customizada, deveria ser boa prática (resultado nada mudou)
 
 
