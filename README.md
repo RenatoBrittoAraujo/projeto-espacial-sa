@@ -75,3 +75,4 @@ RAAN = 360
 AOP = 356.352
 TA = 90
 
+Ao mudar o valor da altitude da FGA de 0 metros de altitude para 1.5km de altitude (a altitude de brasília)

@@ -1,9 +1,19 @@
 %General Mission Analysis Tool(GMAT) Script
 %Created: 2023-11-29 12:48:16
 
-SolarSystem.PCKFilename = '../data/planetary_coeff/pck00010.tpc'
-Earth.EquatorialRadius = 6378.1366
-Earth.Flattening = 0.00335281310845547
+
+%----------------------------------------
+%---------- Solar System User-Modified Values
+%----------------------------------------
+
+GMAT SolarSystem.PCKFilename = '../data/planetary_coeff/pck00010.tpc';
+
+%----------------------------------------
+%---------- User-Modified Default Celestial Bodies
+%----------------------------------------
+
+GMAT Earth.EquatorialRadius = 6378.1366;
+GMAT Earth.Flattening = 0.00335281310845547;
 
 %----------------------------------------
 %---------- Spacecraft
@@ -14,12 +24,12 @@ GMAT DefaultSC.DateFormat = UTCGregorian;
 GMAT DefaultSC.Epoch = '18 Dec 2023 00:00:00.000';
 GMAT DefaultSC.CoordinateSystem = EarthMJ2000Eq;
 GMAT DefaultSC.DisplayStateType = ModifiedKeplerian;
-GMAT DefaultSC.RadPer = 6878.1366; 
-GMAT DefaultSC.RadApo = 26378.13659;
-GMAT DefaultSC.INC = 20;
+GMAT DefaultSC.RadPer = 6878.136600000013;
+GMAT DefaultSC.RadApo = 26378.13659000003;
+GMAT DefaultSC.INC = 19.99999999999999;
 GMAT DefaultSC.RAAN = 360;
-GMAT DefaultSC.AOP = 356.352;
-GMAT DefaultSC.TA = 90;
+GMAT DefaultSC.AOP = 356.3520000000002;
+GMAT DefaultSC.TA = 89.99999999999991;
 GMAT DefaultSC.DryMass = 850;
 GMAT DefaultSC.Cd = 2.2;
 GMAT DefaultSC.Cr = 1.8;
@@ -37,7 +47,7 @@ GMAT DefaultSC.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 
 GMAT DefaultSC.CdSigma = 1e+70;
 GMAT DefaultSC.CrSigma = 1e+70;
 GMAT DefaultSC.Id = 'SatId';
-GMAT DefaultSC.Attitude = CoordinateSystemFixed;
+GMAT DefaultSC.Attitude = Spinner;
 GMAT DefaultSC.SPADSRPInterpolationMethod = Bilinear;
 GMAT DefaultSC.SPADSRPScaleFactorSigma = 1e+70;
 GMAT DefaultSC.SPADDragInterpolationMethod = Bilinear;
@@ -53,8 +63,14 @@ GMAT DefaultSC.ModelRotationZ = 0;
 GMAT DefaultSC.ModelScale = 1;
 GMAT DefaultSC.AttitudeDisplayStateType = 'Quaternion';
 GMAT DefaultSC.AttitudeRateDisplayStateType = 'AngularVelocity';
-GMAT DefaultSC.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT DefaultSC.Q1 = 0;
+GMAT DefaultSC.Q2 = 0;
+GMAT DefaultSC.Q3 = 0;
+GMAT DefaultSC.Q4 = 1;
 GMAT DefaultSC.EulerAngleSequence = '321';
+GMAT DefaultSC.AngularVelocityX = 0;
+GMAT DefaultSC.AngularVelocityY = 0;
+GMAT DefaultSC.AngularVelocityZ = 0;
 
 %----------------------------------------
 %---------- GroundStations
@@ -67,8 +83,8 @@ GMAT AntenaLDTEA.CentralBody = Earth;
 GMAT AntenaLDTEA.StateType = Spherical;
 GMAT AntenaLDTEA.HorizonReference = Ellipsoid;
 GMAT AntenaLDTEA.Location1 = -15.990271;
-GMAT AntenaLDTEA.Location2 = -48.043669;
-GMAT AntenaLDTEA.Location3 = 0;
+GMAT AntenaLDTEA.Location2 = 311.956331;
+GMAT AntenaLDTEA.Location3 = 1.5;
 GMAT AntenaLDTEA.Id = 'StationId';
 GMAT AntenaLDTEA.IonosphereModel = 'None';
 GMAT AntenaLDTEA.TroposphereModel = 'None';
@@ -76,7 +92,7 @@ GMAT AntenaLDTEA.DataSource = 'Constant';
 GMAT AntenaLDTEA.Temperature = 295.1;
 GMAT AntenaLDTEA.Pressure = 1013.5;
 GMAT AntenaLDTEA.Humidity = 55;
-GMAT AntenaLDTEA.MinimumElevationAngle = 7;
+GMAT AntenaLDTEA.MinimumElevationAngle = 0;
 
 %----------------------------------------
 %---------- ForceModels
@@ -115,10 +131,10 @@ GMAT InternalODEModel.GravityField.Earth.TideModel = 'None';
 Create Propagator DefaultProp;
 GMAT DefaultProp.FM = InternalODEModel;
 GMAT DefaultProp.Type = RungeKutta89;
-GMAT DefaultProp.InitialStepSize = 1000;
+GMAT DefaultProp.InitialStepSize = 100;
 GMAT DefaultProp.Accuracy = 9.999999999999999e-12;
 GMAT DefaultProp.MinStep = 100;
-GMAT DefaultProp.MaxStep = 2700;
+GMAT DefaultProp.MaxStep = 300;
 GMAT DefaultProp.MaxStepAttempts = 50;
 GMAT DefaultProp.StopIfAccuracyIsViolated = true;
 
@@ -129,21 +145,23 @@ GMAT DefaultProp.StopIfAccuracyIsViolated = true;
 Create ContactLocator ContactLocator1;
 GMAT ContactLocator1.Target = DefaultSC;
 GMAT ContactLocator1.Filename = 'ContactLocator1.txt';
+GMAT ContactLocator1.OccultingBodies = {Earth};
 GMAT ContactLocator1.InputEpochFormat = 'UTCGregorian';
 GMAT ContactLocator1.InitialEpoch = '18 Dec 2023 00:00:00.000';
+GMAT ContactLocator1.StepSize = 5;
 GMAT ContactLocator1.FinalEpoch = '18 Jan 2024 00:00:00.000';
-GMAT ContactLocator1.UseEntireInterval = true;
-GMAT ContactLocator1.OccultingBodies = {Earth};
-GMAT ContactLocator1.StepSize = 10;
+GMAT ContactLocator1.UseLightTimeDelay = true;
+GMAT ContactLocator1.UseStellarAberration = true;
 GMAT ContactLocator1.WriteReport = true;
 GMAT ContactLocator1.RunMode = Automatic;
+GMAT ContactLocator1.UseEntireInterval = true;
 GMAT ContactLocator1.Observers = {AntenaLDTEA};
 GMAT ContactLocator1.LightTimeDirection = Transmit;
 GMAT ContactLocator1.LeftJustified = false;
 GMAT ContactLocator1.ReportPrecision = 3;
-GMAT ContactLocator1.IntervalStepSize = 60;
-GMAT ContactLocator1.ReportTimeFormat = 'UTCGregorian';
 GMAT ContactLocator1.ReportFormat = 'AzimuthElevationRangeReport';
+GMAT ContactLocator1.IntervalStepSize = 5;
+GMAT ContactLocator1.ReportTimeFormat = 'UTCGregorian';
 
 %GMAT ContactLocator1.LightTimeDirection = Transmit;
 %GMAT ContactLocator1.UseLightTimeDelay = true;
@@ -156,9 +174,9 @@ GMAT ContactLocator1.ReportFormat = 'AzimuthElevationRangeReport';
 
 Create OrbitView DefaultOrbitView;
 GMAT DefaultOrbitView.SolverIterations = Current;
-GMAT DefaultOrbitView.UpperLeft = [ 0.25 0.03751617076326003 ];
-GMAT DefaultOrbitView.Size = [ 0.9935064935064936 0.9598965071151359 ];
-GMAT DefaultOrbitView.RelativeZOrder = 111;
+GMAT DefaultOrbitView.UpperLeft = [ 0.1458333333333333 0.03751617076326003 ];
+GMAT DefaultOrbitView.Size = [ 0.9940476190476191 0.9598965071151359 ];
+GMAT DefaultOrbitView.RelativeZOrder = 31;
 GMAT DefaultOrbitView.Maximized = true;
 GMAT DefaultOrbitView.Add = {DefaultSC, Earth};
 GMAT DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
@@ -188,9 +206,9 @@ GMAT DefaultOrbitView.EnableConstellations = On;
 
 Create GroundTrackPlot DefaultGroundTrackPlot;
 GMAT DefaultGroundTrackPlot.SolverIterations = Current;
-GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.25 0.03751617076326003 ];
-GMAT DefaultGroundTrackPlot.Size = [ 0.9935064935064936 0.9598965071151359 ];
-GMAT DefaultGroundTrackPlot.RelativeZOrder = 81;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.1458333333333333 0.03751617076326003 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.9940476190476191 0.9598965071151359 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 19;
 GMAT DefaultGroundTrackPlot.Maximized = true;
 GMAT DefaultGroundTrackPlot.Add = {DefaultSC, AntenaLDTEA};
 GMAT DefaultGroundTrackPlot.DataCollectFrequency = 1;

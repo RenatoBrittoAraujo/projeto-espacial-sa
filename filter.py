@@ -21,6 +21,8 @@ range = 600
 # range with earth radius
 range_earth = range + R
 
+INTERVAL_STEP_SIZE = 5
+
 # get all ranges
 # ranges = [float(data["Range (km)"]) for data in dataset]
 
@@ -42,7 +44,7 @@ for data in dataset:
     # res = r * math.cos(e)
     ranges.append(res)
 
-    print("D:", d, "O (deg):", math.degrees(o), "alt:\t", res)
+    # print("D:", d, "O (deg):", math.degrees(o), "alt:\t", res)
     # if res < range:
 
 # calculate standard deviation
@@ -70,4 +72,13 @@ for val in ranges:
 
 # print("FILTERED:", filtered)
 
-print(f"Events in target of <{range}:", len(filtered))
+print(f"Events in target of <{range}:", len(filtered) * INTERVAL_STEP_SIZE)
+
+# save printed info to res%d.txt
+with open(f"res{sys.argv[1]}.txt", "w") as f:
+    f.write(f"Mean: {mean}\n")
+    f.write(f"Standard Deviation: {std_dev}\n")
+    f.write(f"Max Range: {max(ranges)}\n")
+    f.write(f"Min Range: {min(ranges)}\n")
+    f.write(f"Events in target of <{range}: {len(filtered) * INTERVAL_STEP_SIZE}\n")
+    # f.write(f"FILTERED: {filtered}\n")
